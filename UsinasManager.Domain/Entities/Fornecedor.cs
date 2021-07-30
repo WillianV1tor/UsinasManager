@@ -6,7 +6,11 @@ using System.Threading.Tasks;
 
 namespace UsinasManager.Domain.Entities
 {
-	class UsinaConfiguration
+	public class Fornecedor
 	{
+		public int FornecedorId { get; set; }
+		public string Nome { get; set; }
+
+		public virtual IEnumerable<Usina> Usinas { get; set; }
 	}
 }

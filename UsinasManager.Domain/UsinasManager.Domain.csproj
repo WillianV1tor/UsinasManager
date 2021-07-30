@@ -31,11 +31,14 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="Entities\Fornecedor.cs" />
+    <Compile Include="Entities\Usina.cs" />
+    <Compile Include="Interfaces\IFornecedorRepository.cs" />
+    <Compile Include="Interfaces\IRepositoryBase.cs" />
+    <Compile Include="Interfaces\IUsinaRepository.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Entities\" />
-    <Folder Include="Interfaces\" />
     <Folder Include="Services\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

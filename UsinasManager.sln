@@ -11,8 +11,6 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Application", "Application"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Domain", "Domain", "{28DA1500-A4CC-4050-9479-FD0845E52B2F}"
 EndProject
-Project("{F184B08F-C81C-45F6-A57F-5ABD9991F28F}") = "UsinasManager.MVC", "UsinasManager.MVC\UsinasManager.MVC.vbproj", "{88DB6FC4-A270-47EA-86BD-3344452C55C7}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UsinasManager.Domain", "UsinasManager.Domain\UsinasManager.Domain.csproj", "{14350841-0D58-42BC-ADF0-BA0089CEAEEA}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UsinasManager.Application", "UsinasManager.Application\UsinasManager.Application.csproj", "{1743BC32-3DCE-4F32-A3BD-204DEB21496F}"
@@ -23,16 +21,14 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Data", "Data", "{0D4B676C-B
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UsinasManager.Infrastructure.Data", "UsinasManager.Infrastructure.Data\UsinasManager.Infrastructure.Data.csproj", "{93B757DD-4021-4A2F-9640-0869FA871D11}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UsinasManager.Presentation", "UsinasManager.Presentation\UsinasManager.Presentation.csproj", "{C7AEE837-8859-47C4-B14D-AEE75E7621CC}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{88DB6FC4-A270-47EA-86BD-3344452C55C7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{88DB6FC4-A270-47EA-86BD-3344452C55C7}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{88DB6FC4-A270-47EA-86BD-3344452C55C7}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{88DB6FC4-A270-47EA-86BD-3344452C55C7}.Release|Any CPU.Build.0 = Release|Any CPU
 		{14350841-0D58-42BC-ADF0-BA0089CEAEEA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{14350841-0D58-42BC-ADF0-BA0089CEAEEA}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{14350841-0D58-42BC-ADF0-BA0089CEAEEA}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -45,16 +41,20 @@ Global
 		{93B757DD-4021-4A2F-9640-0869FA871D11}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{93B757DD-4021-4A2F-9640-0869FA871D11}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{93B757DD-4021-4A2F-9640-0869FA871D11}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C7AEE837-8859-47C4-B14D-AEE75E7621CC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C7AEE837-8859-47C4-B14D-AEE75E7621CC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C7AEE837-8859-47C4-B14D-AEE75E7621CC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C7AEE837-8859-47C4-B14D-AEE75E7621CC}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
-		{88DB6FC4-A270-47EA-86BD-3344452C55C7} = {87ED6AE6-7867-48F2-84EA-B291A1DBE2E1}
 		{14350841-0D58-42BC-ADF0-BA0089CEAEEA} = {28DA1500-A4CC-4050-9479-FD0845E52B2F}
 		{1743BC32-3DCE-4F32-A3BD-204DEB21496F} = {99DF14A6-EAC4-40B2-A34A-27C1937B39BB}
 		{0D4B676C-B74D-4A36-A475-924FEC4B36B4} = {9638F9E6-FDBD-4680-A0C8-1B1AC0FF5E0D}
 		{93B757DD-4021-4A2F-9640-0869FA871D11} = {0D4B676C-B74D-4A36-A475-924FEC4B36B4}
+		{C7AEE837-8859-47C4-B14D-AEE75E7621CC} = {87ED6AE6-7867-48F2-84EA-B291A1DBE2E1}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {0BAA5445-55FB-49F3-8408-76C258C13506}

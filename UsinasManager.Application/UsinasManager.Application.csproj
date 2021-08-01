@@ -41,7 +41,19 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ApplicationServiceBase.cs" />
+    <Compile Include="FornecedorApplicationService.cs" />
+    <Compile Include="Interfaces\IApplicationServiceBase.cs" />
+    <Compile Include="Interfaces\IFornecedorApplicationService.cs" />
+    <Compile Include="Interfaces\IUsinaApplicationService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="UsinaApplicationService.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\UsinasManager.Domain\UsinasManager.Domain.csproj">
+      <Project>{14350841-0d58-42bc-adf0-ba0089ceaeea}</Project>
+      <Name>UsinasManager.Domain</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace UsinasManager.Domain.Interfaces
+namespace UsinasManager.Application.Interfaces
 {
-	public interface IRepositoryBase<TEntity> where TEntity : class
+	public interface IApplicationServiceBase<TEntity> where TEntity : class
 	{
 		void Add(TEntity entity);
 

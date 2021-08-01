@@ -17,7 +17,7 @@ namespace UsinasManager.Infrastructure.Data.Context
 
 		}
 
-		public DbSet<Fornecedor> Clientes { get; set; }
+		public DbSet<Fornecedor> Fornecedores { get; set; }
 
 		public DbSet<Usina> Usinas { get; set; }
 

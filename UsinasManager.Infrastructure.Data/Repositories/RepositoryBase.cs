@@ -4,7 +4,7 @@ using System.Data.Entity;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using UsinasManager.Domain.Interfaces;
+using UsinasManager.Domain.Interfaces.Repositories;
 using UsinasManager.Infrastructure.Data.Context;
 
 namespace UsinasManager.Infrastructure.Data.Repositories

@@ -1,42 +1,46 @@
 ﻿@model UsinasManager.Presentation.ViewModels.UsinaViewModel
 
 @{
-    ViewBag.Title = "View1";
+    ViewBag.Title = "Details";
 }
 
-<h2>View1</h2>
+<div class="center-in-page">
+	<p class="default-title">Detalhes da usina</p>
+	<hr />
 
-<div>
-    <h4>UsinaViewModel</h4>
-    <hr />
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.UC)
-        </dt>
+	<div class="row vertical-center">
+		<div class="col-3">
+			@Html.LabelFor(model => model.Ativo, new { @class = "font-weight-500" })
+		</div>
+		<div class="col-9">
+			<div class="switch">
+				<input type="checkbox" id="Ativo" name="Ativo" value="true"
+						 @if (Model.Ativo) { @: checked
+						 }>
+				<span class="slider round"></span>
+			</div>
+		</div>
+	</div>
 
-        <dd>
-            @Html.DisplayFor(model => model.UC)
-        </dd>
+	<div class="row vertical-center">
+		<div class="col-3">
+			@Html.LabelFor(model => model.FornecedorId, "Fornecedor", new { @class = "font-weight-500" })
+		</div>
+		<div class="col-9">
+			@Html.EditorFor(model => model.Fornecedor.Nome, new { htmlAttributes = new { @class = "input-default", disabled = "disabled" } })
+		</div>
+	</div>
+	<div class="row vertical-center">
+		<div class="col-3">
+			@Html.LabelFor(model => model.UC, new { @class = "font-weight-500" })
+		</div>
+		<div class="col-9">
+			@Html.EditorFor(model => model.UC, new { htmlAttributes = new { @class = "input-default", disabled = "disabled" } })
+		</div>
+	</div>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.Ativo)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Ativo)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.FornecedorId)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.FornecedorId)
-        </dd>
-
-    </dl>
+	<div class="fr padding-15">
+		@Html.ActionLink("Editar", "Edit", "Usinas", new { id = Model.UsinaId },  new { @class = "button" })
+		@Html.ActionLink("Fechar", "Index", "Usinas", new { @class = "button" })
+	</div>
 </div>
-<p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.UsinaId }) |
-    @Html.ActionLink("Back to List", "Index")
-</p>

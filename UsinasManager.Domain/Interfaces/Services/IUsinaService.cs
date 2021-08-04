@@ -11,5 +11,7 @@ namespace UsinasManager.Domain.Interfaces.Services
 	public interface IUsinaService : IServiceBase<Usina>
 	{
 		IEnumerable<Usina> FiltrarDados(FiltroUsina filtroUsina);
+
+		bool VerificaCadastroDuplicado(Usina usina);
 	}
 }

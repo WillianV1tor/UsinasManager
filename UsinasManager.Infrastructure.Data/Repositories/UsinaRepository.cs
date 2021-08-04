@@ -13,13 +13,22 @@ namespace UsinasManager.Infrastructure.Data.Repositories
 	{
 		public IEnumerable<Usina> FiltrarDados(FiltroUsina filtroUsina)
 		{
-			//var query = from item in UsinasManagerContext.Usinas
-			//			where item.FornecedorId == filtroUsina.FornecedorID
-			//			&& item.UC == filtroUsina.UC
-			//			&& item.Ativo == filtroUsina.Ativo
-			//			select item;
-			//return query;
-			throw new NotImplementedException();
+			IQueryable<Usina> query = UsinasManagerContext.Usinas;
+
+			if (filtroUsina.Ativo != null)
+			{
+				query = query.Where(q => q.Ativo == filtroUsina.Ativo);
+			}
+			if (filtroUsina.FornecedorID != 0)
+			{
+				query = query.Where(q => q.FornecedorId == filtroUsina.FornecedorID);
+			}
+			if (filtroUsina.UC != null && filtroUsina.UC != string.Empty)
+			{
+				query = query.Where(q => q.UC == filtroUsina.UC);
+			}
+
+			return query.ToList();
 		}
 	}
 }

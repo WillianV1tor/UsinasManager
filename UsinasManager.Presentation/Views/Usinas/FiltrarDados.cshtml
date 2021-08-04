@@ -1,0 +1,50 @@
+﻿@model UsinasManager.Domain.Entities.Filtros.FiltroUsina
+
+
+@using (Html.BeginForm("FiltrarDados", "Usinas"))
+{
+
+	<div>
+		<section class="three-column">
+			<div class="item text-align-left">
+				@Html.LabelFor(model => model.FornecedorID, "Fornecedor")
+				@Html.DropDownList("FornecedorId", (IEnumerable<SelectListItem>)ViewBag.FornecedorId, string.Empty, new { @class = "input-default" })
+			</div>
+			<div class="item text-align-center">
+				@Html.LabelFor(model => model.UC, "UC da usina")
+				@Html.EditorFor(model => model.UC, new { htmlAttributes = new { @class = "input-default" } })
+			</div>
+			<div class="item text-align-right">
+				@Html.LabelFor(model => model.Ativo)
+				@Html.DropDownListFor(m => m.Ativo,
+					new SelectList(
+						new[]
+						{
+							new SelectListItem { Value = null, Text = "", Selected = true },
+							new SelectListItem { Value = "true", Text = "Sim" },
+							new SelectListItem { Value = "false", Text = "Não" }
+						},
+						"Value",
+						"Text"
+						),
+						new { @class = "input-default" }
+					)
+			</div>
+		</section>
+	</div>
+
+	<div class="text-align-right">
+		@Html.ActionLink("Cadastrar", "Create", "Usinas", new { @class = "button" })
+		<button type="submit" class="button">Filtrar dados</button>
+	</div>
+}
+
+@section Scripts {
+	@Scripts.Render("~/bundles/jqueryval")
+
+	<script>
+		$(function () {
+
+      });
+	</script>
+}

@@ -23,5 +23,10 @@ namespace UsinasManager.Domain.Services
 		{
 			return _usinaRepository.FiltrarDados(filtroUsina);
 		}
+
+		public bool VerificaCadastroDuplicado(Usina usina)
+		{
+			return GetAll().Any(u => u.UC == usina.UC && u.FornecedorId == usina.FornecedorId);
+		}
 	}
 }

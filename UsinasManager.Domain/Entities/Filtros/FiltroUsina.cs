@@ -8,7 +8,7 @@ namespace UsinasManager.Domain.Entities.Filtros
 {
 	public class FiltroUsina
 	{
-		public int? FornecedorID { get; set; }
+		public int FornecedorID { get; set; }
 
 		public string UC { get; set; }
 

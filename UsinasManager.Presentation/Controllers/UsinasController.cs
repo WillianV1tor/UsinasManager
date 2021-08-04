@@ -10,6 +10,7 @@ using UsinasManager.Domain.Entities.Filtros;
 using UsinasManager.Domain.Interfaces.Repositories;
 using UsinasManager.Presentation.AutoMapper;
 using UsinasManager.Presentation.ViewModels;
+using PagedList;
 
 namespace UsinasManager.Presentation.Controllers
 {
@@ -17,19 +18,36 @@ namespace UsinasManager.Presentation.Controllers
     {
         private readonly IMapper mapper;
         private readonly IUsinaApplicationService _usinaApplicationService;
+        private readonly IFornecedorApplicationService _fornecedorApplicationService;
 
-        public UsinasController(IUsinaApplicationService usinaApplicationService)
+        // Ninject foi usado para injeção de dependência
+        public UsinasController(IUsinaApplicationService usinaApplicationService, IFornecedorApplicationService fornecedorApplicationService)
         {
             mapper = AutoMapperConfig.Mapper;
             _usinaApplicationService = usinaApplicationService;
+            _fornecedorApplicationService = fornecedorApplicationService;
         }
 
+        // Os parâmetros opcionais existem para configuração da paginação
         // GET: Usinas
-        public ActionResult Index()
+        public ActionResult Index(int? page, int? size)
         {
             var usinas = _usinaApplicationService.GetAll();
+
+            return InternalIndex(usinas, page, size);
+        }
+
+        // Action result para chamadas internas na controller
+        public ActionResult InternalIndex(IEnumerable<Usina> usinas, int? page, int? size)
+        {
             var usinaViewModel = mapper.Map<IEnumerable<Usina>, IEnumerable<UsinaViewModel>>(usinas);
-            return View(usinaViewModel);
+
+            var pageSize = size != null ? size.Value : 10;
+            var pageNumber = page != null ? page.Value : 1;
+
+            ViewBag.FornecedorId = new SelectList(_fornecedorApplicationService.GetAll(), "FornecedorId", "Nome");
+
+            return View("Index", usinaViewModel.ToPagedList(pageNumber, pageSize));
         }
 
         // GET: Usinas/Details/5
@@ -44,6 +62,8 @@ namespace UsinasManager.Presentation.Controllers
         // GET: Usinas/Create
         public ActionResult Create()
         {
+            ViewBag.FornecedorId = new SelectList(_fornecedorApplicationService.GetAll(), "FornecedorId", "Nome");
+
             return View();
         }
 
@@ -55,12 +75,20 @@ namespace UsinasManager.Presentation.Controllers
             if (ModelState.IsValid)
             {
                 var usina = mapper.Map<UsinaViewModel, Usina>(usinaViewModel);
+
+                if (_usinaApplicationService.VerificaCadastroDuplicado(usina))
+                {
+                    return View("ErroCadastroDuplicado");
+                }
+
                 _usinaApplicationService.Add(usina);
 
-                return Index();
+                return Index(null, null);
             }
 
-            return View(usinaViewModel);
+            ViewBag.FornecedorId = new SelectList(_fornecedorApplicationService.GetAll(), "FornecedorId", "Nome");
+
+            return RedirectToAction("Index");
         }
 
         // GET: Usinas/Edit/5
@@ -68,6 +96,8 @@ namespace UsinasManager.Presentation.Controllers
         {
             var usina = _usinaApplicationService.GetById(id);
             var usinaViewModel = mapper.Map<Usina, UsinaViewModel>(usina);
+
+            ViewBag.FornecedorId = new SelectList(_fornecedorApplicationService.GetAll(), "FornecedorId", "Nome", usinaViewModel.FornecedorId);
 
             return View(usinaViewModel);
         }
@@ -80,10 +110,18 @@ namespace UsinasManager.Presentation.Controllers
             if (ModelState.IsValid)
             {
                 var usina = mapper.Map<UsinaViewModel, Usina>(usinaViewModel);
+
+                if (_usinaApplicationService.VerificaCadastroDuplicado(usina))
+				{
+                    return View("ErroCadastroDuplicado");
+				}
+
                 _usinaApplicationService.Update(usina);
 
-                return Index();
+                return RedirectToAction("Index");
             }
+
+            ViewBag.FornecedorId = new SelectList(_fornecedorApplicationService.GetAll(), "FornecedorId", "Nome", usinaViewModel.FornecedorId);
 
             return View(usinaViewModel);
         }
@@ -97,27 +135,22 @@ namespace UsinasManager.Presentation.Controllers
             return View(usinaViewModel);
         }
 
-        // POST: Usinas/Delete/5
+        // POST: Usinas/DeleteConfirmation/5
         [ValidateAntiForgeryToken]
         [HttpPost]
-        public ActionResult Delete(UsinaViewModel usinaViewModel)
+        public ActionResult DeleteConfirmation(int id)
         {
-            if (ModelState.IsValid)
-            {
-                var usina = mapper.Map<UsinaViewModel, Usina>(usinaViewModel);
-                _usinaApplicationService.Delete(usina);
+            var usina = _usinaApplicationService.GetById(id);
+            _usinaApplicationService.Delete(usina);
 
-                return Index();
-            }
-
-            return View(usinaViewModel);
+            return Index(null, null);
         }
 
         public ActionResult FiltrarDados(FiltroUsina filtroUsina)
 		{
             var usinas = _usinaApplicationService.FiltrarDados(filtroUsina);
-            var usinaViewModel = mapper.Map<IEnumerable<Usina>, IEnumerable<UsinaViewModel>>(usinas);
-            return View(usinaViewModel);
+            
+            return InternalIndex(usinas, null, null);
         }
     }
 }

@@ -23,5 +23,10 @@ namespace UsinasManager.Application
 		{
 			return _usinaService.FiltrarDados(filtroUsina);
 		}
+
+		public bool VerificaCadastroDuplicado(Usina usina)
+		{
+			return _usinaService.VerificaCadastroDuplicado(usina);
+		}
 	}
 }

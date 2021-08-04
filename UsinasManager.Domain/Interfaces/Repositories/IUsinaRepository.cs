@@ -11,5 +11,6 @@ namespace UsinasManager.Domain.Interfaces.Repositories
 	public interface IUsinaRepository : IRepositoryBase<Usina>
 	{
 		IEnumerable<Usina> FiltrarDados(FiltroUsina filtroUsina);
+
 	}
 }

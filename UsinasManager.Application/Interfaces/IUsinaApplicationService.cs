@@ -11,5 +11,7 @@ namespace UsinasManager.Application.Interfaces
 	public interface IUsinaApplicationService : IApplicationServiceBase<Usina>
 	{
 		IEnumerable<Usina> FiltrarDados(FiltroUsina filtroUsina);
+
+		bool VerificaCadastroDuplicado(Usina usina);
 	}
 }

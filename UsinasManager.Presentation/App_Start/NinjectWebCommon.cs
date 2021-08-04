@@ -62,13 +62,10 @@ namespace UsinasManager.Presentation.App_Start
             }
         }
 
-        /// <summary>
-        /// Load your modules or register your services here!
-        /// </summary>
+
         /// <param name="kernel">The kernel.</param>
         private static void RegisterServices(IKernel kernel)
         {
-            ///Application layer
             kernel.Bind(typeof(IApplicationServiceBase<>)).To(typeof(ApplicationServiceBase<>));
             kernel.Bind<IUsinaApplicationService>().To<UsinaApplicationService>();
             kernel.Bind<IFornecedorApplicationService>().To<FornecedorApplicationService>();

@@ -1,45 +1,72 @@
-﻿@model IEnumerable<UsinasManager.Presentation.ViewModels.UsinaViewModel>
+﻿@model PagedList.PagedList<UsinasManager.Presentation.ViewModels.UsinaViewModel>
+@using PagedList.Mvc;
 
 @{
-    ViewBag.Title = "Index";
+	ViewBag.Title = "Index";
 }
 
-<h2>Index</h2>
+<p class="default-title">Listagem de usinas de Geração Distribuída</p>
+<hr />
 
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
-<table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.UC)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Ativo)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.FornecedorId)
-        </th>
-        <th></th>
-    </tr>
+@Html.Partial("FiltrarDados", new UsinasManager.Domain.Entities.Filtros.FiltroUsina())
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.UC)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Ativo)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.FornecedorId)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.UsinaId }) |
-            @Html.ActionLink("Details", "Details", new { id=item.UsinaId }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.UsinaId })
-        </td>
-    </tr>
-}
+<table class="table margin-top-40">
+	<tr>
+		<th>
+			@Html.DisplayNameFor(model => model.First().Fornecedor)
+		</th>
+		<th>
+			@Html.DisplayNameFor(model => model.First().UC)
+		</th>
+		<th>
+			@Html.DisplayNameFor(model => model.First().Ativo)
+		</th>
+		<th>
+			Ações
+		</th>
+	</tr>
+
+	@foreach (var item in Model)
+	{
+		<tr class="height-35">
+			<td class="text-align-center">
+				@Html.DisplayFor(modelItem => item.Fornecedor.Nome)
+			</td>
+			<td class="text-align-center">
+				@Html.DisplayFor(modelItem => item.UC)
+			</td>
+			<td class="text-align-center">
+				<div class="switch">
+					<input type="checkbox" id="Ativo" name="Ativo"
+							 @if (item.Ativo) { @: checked
+							 }>
+					<span class="slider round"></span>
+				</div>
+			</td>
+			<td class="text-align-center dropdown-action">
+				<div class="dropdown">
+					<strong class="cursor-pointer">&#9776;</strong>
+					<div class="dropdown-child">
+						@Html.ActionLink("Edit", "Edit", new { id = item.UsinaId })
+						@Html.ActionLink("Details", "Details", new { id = item.UsinaId })
+						@Html.ActionLink("Delete", "Delete", new { id = item.UsinaId })
+					</div>
+				</div>
+			</td>
+		</tr>
+	}
 
 </table>
+
+<br />
+
+@Html.PagedListPager(Model, page => Url.Action("Index", new { page, size = Model.PageSize }))
+
+@section Scripts {
+	@Scripts.Render("~/bundles/jqueryval")
+
+	<script>
+		$(function () {
+      });
+	</script>
+}

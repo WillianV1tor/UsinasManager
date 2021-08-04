@@ -52,6 +52,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Context\UsinasManagerContext.cs" />
+    <Compile Include="Context\UsinasManagerDBInitializer.cs" />
     <Compile Include="EntityConfig\FornecedorConfiguration.cs" />
     <Compile Include="EntityConfig\UsinaConfiguration.cs" />
     <Compile Include="Migrations\Configuration.cs" />

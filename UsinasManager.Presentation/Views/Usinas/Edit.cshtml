@@ -1,60 +1,70 @@
 ﻿@model UsinasManager.Presentation.ViewModels.UsinaViewModel
 
 @{
-    ViewBag.Title = "Edit";
+	ViewBag.Title = "Edit";
 }
-
-<h2>Edit</h2>
-
 
 @using (Html.BeginForm())
 {
-    @Html.AntiForgeryToken()
-    
-    <div class="form-horizontal">
-        <h4>UsinaViewModel</h4>
-        <hr />
-        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-        @Html.HiddenFor(model => model.UsinaId)
+	@Html.AntiForgeryToken()
+	@Html.HiddenFor(model => model.UsinaId)
+	<div class="center-in-page">
+		<p class="default-title">Edição da usina</p>
+		<hr />
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.UC, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.UC, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.UC, "", new { @class = "text-danger" })
-            </div>
-        </div>
+		@Html.ValidationSummary(true, "", new { @class = "text-red" })
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.Ativo, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                <div class="checkbox">
-                    @Html.EditorFor(model => model.Ativo)
-                    @Html.ValidationMessageFor(model => model.Ativo, "", new { @class = "text-danger" })
-                </div>
-            </div>
-        </div>
+		<div class="row vertical-center">
+			<div class="col-3">
+				@Html.LabelFor(model => model.Ativo, new { @class = "font-weight-500" })
+			</div>
+			<div class="col-9">
+				<label class="switch">
+					<input type="checkbox" id="Ativo" name="Ativo" value="true"
+							 @if (Model.Ativo) { @: checked
+							 }>
+					<span class="slider round"></span>
+				</label>
+			</div>
+			@Html.ValidationMessageFor(model => model.Ativo, "", new { @class = "text-red" })
+		</div>
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.FornecedorId, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.FornecedorId, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.FornecedorId, "", new { @class = "text-danger" })
-            </div>
-        </div>
+		<div class="row vertical-center">
+			<div class="col-3">
+				@Html.LabelFor(model => model.FornecedorId, "Fornecedor", new { @class = "font-weight-500" })
+			</div>
+			<div class="col-9">
+				@Html.DropDownListFor(model => model.FornecedorId, (IEnumerable<SelectListItem>)ViewBag.FornecedorId, new { @class = "input-default" })
+				@Html.ValidationMessageFor(model => model.FornecedorId, "", new { @class = "text-red" })
+			</div>
+		</div>
+		<div class="row vertical-center">
+			<div class="col-3">
+				@Html.LabelFor(model => model.UC, new { @class = "font-weight-500" })
+			</div>
+			<div class="col-9">
+				@Html.EditorFor(model => model.UC, new { htmlAttributes = new { @class = "input-default" } })
+				@Html.ValidationMessageFor(model => model.UC, "", new { @class = "text-red" })
+			</div>
+		</div>
 
-        <div class="form-group">
-            <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Save" class="btn btn-default" />
-            </div>
-        </div>
-    </div>
+		<div class="fr padding-15">
+			<button type="submit" class="button bg-green">Salvar</button>
+			@Html.ActionLink("Fechar", "Index", "Usinas", new { @class = "button bg-red" })
+		</div>
+	</div>
 }
 
-<div>
-    @Html.ActionLink("Back to List", "Index")
-</div>
-
 @section Scripts {
-    @Scripts.Render("~/bundles/jqueryval")
+	@Scripts.Render("~/bundles/jqueryval")
+
+	<script>
+		$(function () {
+			$("#Ativo").click(function () {
+				$(this).val() == "true" ? $(this).val("false") : $(this).val("true");
+			})
+
+			$("#FornecedorId").val(@Model.FornecedorId);
+      });
+	</script>
 }

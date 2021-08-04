@@ -14,7 +14,9 @@ namespace UsinasManager.Infrastructure.Data.Context
 	{
 		public UsinasManagerContext() : base("UsinasManagerDB")
 		{
-
+			Database.SetInitializer(new UsinasManagerDBInitializer());
+			Configuration.ProxyCreationEnabled = true;
+			Configuration.LazyLoadingEnabled = true;
 		}
 
 		public DbSet<Fornecedor> Fornecedores { get; set; }

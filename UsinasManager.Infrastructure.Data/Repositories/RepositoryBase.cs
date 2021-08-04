@@ -27,6 +27,7 @@ namespace UsinasManager.Infrastructure.Data.Repositories
 		public void Delete(TEntity entity)
 		{
 			UsinasManagerContext.Set<TEntity>().Remove(entity);
+			UsinasManagerContext.SaveChanges();
 		}
 
 		public IEnumerable<TEntity> GetAll()
